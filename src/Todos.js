@@ -57,16 +57,28 @@ getClassName = (item) => {
 
 handSubmit = (e) => {
     e.preventDefault();
-    
+    const newArrayOfTodos = this.state.todos.slice();
+    const fakeNewTodo= {
+        id: Math.floor(Math.random()),
+        task: this.state.newTodoName,
+        importance: this.state.newTodoImportance,
+        is_completed: false,
+    }
+    newArrayOfTodos.push(fakeNewTodo)
+    this.setState({
+        newTodo: '',
+        todos: newArrayOfTodos
+    })
 }
     
     render() {
     //   (console.log(this.state.newTodoName)) //newTodoName state works
     //   (console.log(this.state.newTodoImportance, 'lolol')); //state changes with input from importance
+    console.log(this.state.todos)
         
       return (
             <div className="App">
-                <form onSubmit="">
+                <form onSubmit={this.handSubmit}>
                   <label name="name">
                       Add Name:<input value={this.state.newTodoName} onChange={this.handleNameChange} />  
                 </label>
