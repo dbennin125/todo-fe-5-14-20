@@ -71,6 +71,11 @@ handSubmit = (e) => {
     })
 }
 
+handClick = (id) => {
+    console.log(id)
+}
+
+
 
     render() {
     //   (console.log(this.state.newTodoName)) //newTodoName state works
@@ -90,7 +95,7 @@ handSubmit = (e) => {
                 </form>
                <ul>
                 {
-                this.state.todos.map(item => <li className={this.getClassName(item)} key={item.task}>
+                this.state.todos.map(item => <li onClick={() => this.handClick(item.id)} className={this.getClassName(item)} key={item.task}>
                     <h4>Task: {item.task}<p>Importance: {item.importance}</p></h4>
                 </li>)
                 }
