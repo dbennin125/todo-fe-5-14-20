@@ -70,7 +70,8 @@ handSubmit = (e) => {
         todos: newArrayOfTodos
     })
 }
-    
+
+
     render() {
     //   (console.log(this.state.newTodoName)) //newTodoName state works
     //   (console.log(this.state.newTodoImportance, 'lolol')); //state changes with input from importance
