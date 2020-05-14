@@ -48,7 +48,7 @@ state = {
                <ul>
                 {
                 this.state.todos.map(item => <li className={ item.is_completed ? 'completed' : 'incomplete'} key={item.task}>
-                    {item.task}
+                    <h4>Task: {item.task}<p>Importance: {item.importance}</p></h4>
                 </li>)
                 }
                 </ul> 
