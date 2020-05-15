@@ -14,6 +14,11 @@ import SignUp from './SignUp.js'
 
 
 export default class App extends Component {
+  state = { token: localStorage.getItem('TOKEN') }
+
+  handleToken
+  
+  
   render() {
     return (
             <div>
@@ -21,7 +26,7 @@ export default class App extends Component {
                   <ul>
                     <li>
                     <Link to="/login">Log In</Link>
-                    <Link to="/signup"><p>Sign In</p></Link>
+                    <Link to="/signup"><p>Sign Up</p></Link>
                     <Link to="/todos">To-do List</Link> 
                     </li>
 
