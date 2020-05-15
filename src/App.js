@@ -16,10 +16,14 @@ import SignUp from './SignUp.js'
 export default class App extends Component {
   state = { token: localStorage.getItem('TOKEN') }
 
-  handleToken
+  handleTokenChange = (myToken) => {
+    this.setState({ token: myToken });
+    localStorage.setItem('TOKEN', myToken)
+  }
   
   
   render() {
+    console.log(this.state.token);
     return (
             <div>
                 <Router>
