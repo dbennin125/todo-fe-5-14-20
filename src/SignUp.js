@@ -14,10 +14,9 @@ export default class SignUp extends Component {
         const newUser = await request.post(`http://localhost:3000/auth/signup`,{
             email: this.state.email,
             password: this.state.password})
-        const token = { token: newUser.body };
+        
         //creates a fake token, the real one comes from the backend
-        console.log(token, this.state.email, this.state.password)
-        this.props.handleTokenChange(token);
+        localStorage.setItem('TOKEN', newUser.body.token)
         // handleTokenChange is in App.js this will bring it to App.js
         this.props.history.push('/todos');
         //pushes user to todos list

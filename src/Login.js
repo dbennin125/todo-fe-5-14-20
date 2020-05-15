@@ -5,19 +5,18 @@ export default class Login extends Component {
     state = {
         email: '',
         Password: '',
-        user: ''
+       
     }
     
     handSubmit = async (e)  => {
         e.preventDefault();
-        const existingUser = await request.post(`http://localhost:3000/auth/signin`,{
-            email: this.state.email,
-            password: this.state.password})
-        const token = { token: existingUser.body };
+        const existingUser = await request.post(`http://localhost:3000/auth/signin`, this.state)
+        // const token = { token: existingUser.body };
         //creates a fake token, the real one comes from the backend
-        console.log(token, this.state.email, this.state.password)
+        localStorage.setItem('TOKEN', existingUser.body.token)
+        // console.log(token, this.state.email, this.state.password)
         
-        this.props.handleTokenChange(token);
+        this.props.handleTokenChange(existingUser.body.token);
         // handleTokenChange is in App.js this will bring it to App.js
         this.props.history.push('/todos');
         //pushes user to todos list
