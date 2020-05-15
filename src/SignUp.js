@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import request from 'superagent';
 
 
 export default class SignUp extends Component {
@@ -8,18 +9,19 @@ export default class SignUp extends Component {
     }
     
 
-    handSubmit = (e) => {
+    handSubmit = async (e)  => {
         e.preventDefault();
-
-        const token = Math.random();
+        const newUser = await request.post(`http://localhost:3000/auth/signup`,{
+            email: this.state.email,
+            password: this.state.password})
+        const token = { token: newUser.body };
         //creates a fake token, the real one comes from the backend
         console.log(token, this.state.email, this.state.password)
         this.props.handleTokenChange(token);
-        //handleTokenChange is in App.js this will bring it to App.js
+        // handleTokenChange is in App.js this will bring it to App.js
         this.props.history.push('/todos');
         //pushes user to todos list
     }
-    
     render() {
     //    console.log(this.state.email)//email state responds with new way
     // console.log(this.state.password)
