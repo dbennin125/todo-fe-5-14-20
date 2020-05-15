@@ -66,26 +66,34 @@ getClassName = (item) => {
     if (!item.is_completed) return 'incomplete';
 }
 
-handSubmit = (e) => {
+handSubmit = async(e) => {
     e.preventDefault();
-    const newArrayOfTodos = this.state.todos.slice();
-    const fakeNewTodo= {
-        id: Math.floor(Math.random()),
-        task: this.state.newTodoName,
-        importance: this.state.newTodoImportance,
-        is_completed: false,
-    }
-    newArrayOfTodos.push(fakeNewTodo)
-    this.setState({
-        newTodo: '',
-        todos: newArrayOfTodos
-    })
+    const newTodosArray = this.state.todos.slice();
+    const newTodo = await request.post(`http://localhost:3000/api/todos`,
+    {task: this.state.newTodoName,
+    importance: this.state.newTodoImportance}).set('Authorization', this.state.token || localStorage.getItem('TOKEN'))
+    newTodosArray.push(newTodo)
+    
+    this.setState({ todos: newTodosArray, newTodo })
+
+//     const newArrayOfTodos = this.state.todos.slice();
+//     const fakeNewTodo= {
+//         id: Math.floor(Math.random()),
+//         task: this.state.newTodoName,
+//         importance: this.state.newTodoImportance,
+//         is_completed: false,
+//     }
+//     newArrayOfTodos.push(fakeNewTodo)
+//     this.setState({
+//         newTodo: '',
+//         todos: newArrayOfTodos
+//     })
 }
 
 handClick = async(id) => {
-    await request.get(`http://localhost:3000/api/todos/${id}`).set('Authorization', this.state.token || localStorage.getItem('TOKEN'))
+    await request.put(`http://localhost:3000/api/todos/${id}`).set('Authorization', this.state.token || localStorage.getItem('TOKEN'))
     const userList = await request.get(`http://localhost:3000/api/todos`).set('Authorization', this.state.token || localStorage.getItem('TOKEN'))
-    const updatedTasks = userList.body
+    const updatedTasks = userList.body;
     this.setState({ todos: updatedTasks })
 }
 
@@ -94,7 +102,7 @@ handClick = async(id) => {
     render() {
     //   (console.log(this.state.newTodoName)) //newTodoName state works
     //   (console.log(this.state.newTodoImportance, 'lolol')); //state changes with input from importance
-    console.log(this.state.todos)
+    // console.log(this.state.todos)
         
       return (
             <div className="App">
