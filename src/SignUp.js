@@ -13,7 +13,7 @@ export default class SignUp extends Component {
 
         const token = Math.random();
         //creates a fake token, the real one comes from the backend
-        // console.log(token, this.state.email, this.state.password)
+        console.log(token, this.state.email, this.state.password)
         this.props.handleTokenChange(token);
         //handleTokenChange is in App.js this will bring it to App.js
         this.props.history.push('/todos');

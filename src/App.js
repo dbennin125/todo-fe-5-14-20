@@ -9,7 +9,8 @@ import {
 import './App.css';
 import Todos from './Todos.js';
 import Login from './Login.js';
-import SignUp from './SignUp.js'
+import SignUp from './SignUp.js';
+import PrivateRoute from './PrivateRoute.js';
 
 
 
@@ -29,26 +30,31 @@ export default class App extends Component {
                 <Router>
                   <ul>
                     <li>
+
                     <Link to="/login">Log In</Link>
                     <Link to="/signup"><p>Sign Up</p></Link>
-                    <Link to="/todos">To-do List</Link> 
+                    {
+                      this.state.token && <Link to="/todos">To-do List</Link>}
+                
+                    <p><button onClick={() => this.handleTokenChange('')}>Goodbye</button></p>
+                     
                     </li>
 
                   </ul>
                     <Switch>
                         <Route 
-                            path="/login" 
                             exact
-                            render={(routerProps) => <Login {...routerProps} />} 
+                            path="/login" 
+                            render={(routerProps) => <Login handleTokenChange={this.handleTokenChange} {...routerProps} />} 
                         />
                         <Route 
                             path="/signup" 
                             exact
-                            render={(routerProps) => <SignUp {...routerProps} />} 
+                            render={(routerProps) => <SignUp handleTokenChange={this.handleTokenChange} {...routerProps} />} 
                         />
-                        <Route 
-                            path="/todos" 
-                            render={(routerProps) => <Todos {...routerProps} />} 
+                        <PrivateRoute 
+                            path="/todos" token={this.state.token}
+                            render={(routerProps) => <Todos  {...routerProps} />} 
                         />
                     </Switch>
                 </Router>
