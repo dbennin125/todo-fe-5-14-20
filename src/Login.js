@@ -9,9 +9,13 @@ export default class Login extends Component {
     handSubmit = (e) => {
         e.preventDefault();
 
-        const token = Math.floor(Math.random());
-        // console.log(token, this.state.email, this.state.password) //works
-        this.props.
+        const token = Math.random();
+        //creates a fake token, the real one comes from the backend
+        // console.log(token, this.state.email, this.state.password)
+        this.props.handleTokenChange(token);
+        //handleTokenChange is in App.js this will bring it to App.js
+        this.props.history.push('/todos');
+        //pushes user to todos list
     }
 
     render() {
