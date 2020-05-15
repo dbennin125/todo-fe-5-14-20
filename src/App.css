@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 }
+
+li {
+  list-style: none;
+  text-align: center;
+}
+.completed {
+  color: blue;
+  text-decoration-line: line-through;
+ 
+}
+.incomplete {
+  color: red;
+  text-transform: uppercase;
+  font-size: 20px;
+}
